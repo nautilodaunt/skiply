@@ -1,0 +1,10 @@
+{
+  "name": "skiply",
+  "version": "0.6.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/background.js && node --check src/content.js && node --check src/popup.js && node --check src/location.js && node --check src/location-core.js && node --check src/location-bridge.js && node --check src/location-simulator.js && node --check src/sign-in.js && node --check src/session-actions.js && node --check src/course-scanner.js && node --check src/poll-adapter.js"
+  }
+}

@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Skiply geolocation test</title><style>body{font:16px system-ui;max-width:700px;margin:60px auto;padding:20px;background:#101815;color:#d4eadd}button{font:inherit;padding:12px;margin-right:8px;cursor:pointer}pre{white-space:pre-wrap;line-height:1.8}</style></head><body><h1>Skiply geolocation test</h1><p>Open Skiply → Location tools, apply coordinates, and enable simulation. Use these buttons to read the browser API.</p><button id="once">Read location</button><button id="watch">Watch location</button><button id="stop">Stop watching</button><pre id="output">Waiting for a test.</pre><script>
+let watch;
+const output = document.getElementById('output');
+const show = async position => { const permission = await navigator.permissions.query({name:'geolocation'}); output.textContent = JSON.stringify({permission:permission.state,latitude:position.coords.latitude,longitude:position.coords.longitude,accuracy:position.coords.accuracy,timestamp:position.timestamp},null,2); };
+const fail = error => { output.textContent=error.message; };
+document.getElementById('once').onclick = () => navigator.geolocation.getCurrentPosition(show,fail,{timeout:8000});
+document.getElementById('watch').onclick = () => { if(watch !== undefined) navigator.geolocation.clearWatch(watch); watch=navigator.geolocation.watchPosition(show,fail,{timeout:8000}); };
+document.getElementById('stop').onclick = () => { if(watch !== undefined) navigator.geolocation.clearWatch(watch); watch=undefined; output.textContent='Watch stopped.'; };
+</script></body></html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Skiply</title><link rel="stylesheet" href="popup.css"></head>
+<body class="compact">
+<header><span class="brand">skiply<span class="beta">0.6</span></span><button id="open" class="text-button">Go to iClicker ↗</button></header>
+<main>
+<div class="session-line"><i id="dot"></i><span id="status" role="status">Checking active tab…</span><span id="leader"></span></div>
+<div id="controls" hidden>
+<div class="toggles">
+<label class="control"><span><b>Skiply on</b></span><span class="switch"><input id="enabled" type="checkbox"><span></span></span></label>
+<label class="control"><span><b>Auto-join sessions</b></span><span class="switch"><input id="autoJoin" type="checkbox"><span></span></span></label>
+<label class="control"><span><b>Crowd voting</b></span><span class="switch"><input id="autoSelect" type="checkbox"><span></span></span></label>
+<label class="control"><span><b>Notifications</b></span><span class="switch"><input id="notifications" type="checkbox"><span></span></span></label>
+</div>
+<a id="locations" class="location-button" href="location.html">⌖ Location <span>Manage →</span></a>
+<select id="starred-location" aria-label="Select a starred location"><option value="">★ Starred locations</option></select>
+<p id="location-status" class="quiet">Location simulation: iClicker + local sites</p>
+<p id="notice" class="quiet" role="status"></p>
+<details><summary>More</summary><label class="control"><span><b>Remember sign-in</b></span><span class="switch"><input id="rememberSignIn" type="checkbox"><span></span></span></label><p id="sign-in-note" class="quiet"></p><label class="threshold">Minimum crowd share <select id="minimumShare"><option value="0">Any leader</option><option value="50">50%</option><option value="65">65%</option><option value="80">80%</option></select></label><div class="section-title"><h2>History</h2><div class="exports"><button id="csv">CSV ↓</button><button id="json">JSON ↓</button></div></div><input id="search" type="search" placeholder="Search questions" aria-label="Search question history"><div id="history"></div></details>
+</div></main><script type="module" src="src/popup.js"></script></body></html>

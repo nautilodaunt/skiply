@@ -1,0 +1,76 @@
+{
+  "manifest_version": 3,
+  "name": "Skiply",
+  "version": "0.6.0",
+  "description": "Crowd answer selection, session monitoring, and saved browser locations for iClicker.",
+  "minimum_chrome_version": "120",
+  "icons": {
+    "128": "assets/icon.png"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications",
+    "scripting",
+    "cookies"
+  ],
+  "host_permissions": [
+    "https://student.iclicker.com/*",
+    "https://activity-service.iclicker.com/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Skiply",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://student.iclicker.com/*"
+      ],
+      "js": [
+        "src/session-actions.js",
+        "src/course-scanner.js",
+        "src/poll-adapter.js",
+        "src/content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://student.iclicker.com/*",
+        "http://localhost/*",
+        "http://127.0.0.1/*"
+      ],
+      "js": [
+        "src/location-simulator.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://student.iclicker.com/*",
+        "http://localhost/*",
+        "http://127.0.0.1/*"
+      ],
+      "js": [
+        "src/location-bridge.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "toggle-monitoring": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Toggle Skiply monitoring"
+    }
+  }
+}
